@@ -5,12 +5,14 @@
 #include <sstream>
 #include<ctype.h>
 #include <iomanip>//libreria para manipular el formato de salida
+#include "conio.h"
 
 using namespace std;
 
 int factorial();
 int fibonacci();
 int factorial_recursivo();
+long double factorial(int n);
 
 int main() {
 	int opcion;
@@ -19,7 +21,8 @@ int main() {
 		cout << "\nMenu Principal\n" << endl;
 		cout << "1. Factorial" << endl;
 		cout << "2. Fibonacci" << endl;
-		cout << "3. Salir" << endl;
+		cout << "3. Factorial recursivo" << endl;
+		cout << "4. Salir" << endl;
 		cout << "Opcion: ";
 		cin >> opcion;
 		switch (opcion) {
@@ -27,7 +30,9 @@ int main() {
 			break;
 		case 2: fibonacci();
 			break;
-		case 3:
+		case 3: factorial_recursivo();
+			break;
+		case 4:
 			cout << "Cerrando Sistema" << endl;
 			break;
 		default: cout << "Valor Invalido" << endl;
@@ -40,41 +45,91 @@ int main() {
 int factorial() {
 	long double factorial_N = 1;//Se declaro en long double porque si lo ponemos en int nos manda error
 	int numero;
-	string sNumero;
-	char cNumero;
+	string s_Numero;
+	float decimal;
+
 
 	do {
 		cout << "Ingrese el valor de n: ";
-		cin >> sNumero;
-		stringstream intNumero(sNumero);
+		cin >> s_Numero;
+		stringstream intNumero(s_Numero);//Esto es equivalente a aquello que hicimos en el apartado anterior de cin, pero tomando el string intnumero como stream fuente
 		intNumero >> numero;
 
-		if (numero < 0)
-			cout << "Error!: el numero debera ser mayor o igual a cero" << endl;
-
-		if (isalpha(sNumero[0]))
-		{
-			printf("The character is an alphabet\n");
-			numero = (int)sNumero[0];
+		if (numero < 0) {
+			cout << "Error!: el numero debera ser mayor o igual a 0." << endl;
 		}
 	} while (numero < 0);
+
+		if (isalpha(s_Numero[0])) {//Función que revisa si el caracter es de tipo alfabeto
+			numero = (int)s_Numero[0];
+			cout << "El caracter ingresado es del alfabeto, su codigo en ASCII es: " <<  numero << endl;
+			
+		}
+			decimal = numero;
+			numero = static_cast <float>(decimal);	
+			
+			cout << "La conversion de int a float es: " << numero << endl;
+		
 
 	for (int i = 1; i <= numero; i++) {
 		factorial_N *= i;
 
 	}
-
 	cout << "El factorial del numero ingresado es: " << setprecision(0) << setiosflags(ios::fixed) << factorial_N << endl;//setprecision manipula el numero de ceros despues del punto decimal
 	//setiosflags(ios::fixed) muestra todos los numeros decimales
-	return 0;
+
+			return factorial_N;
+
+} 
+
+
+long double factorial(int n) {
+	long double fact;
+	string s_num;
+	int num;
+
+	if(n == 0){ //caso base
+		return 1;
+	}
+
+	if (n < 0) {
+		cout << "Error!: el numero debera ser mayor o igual a cero" << endl;
+		
+	}
+
+	if (isalpha(s_num[0])) {
+
+		cout << "El caracter es del alfabeto......" << endl;
+		num = (int)s_num[0];
+	}
+
+	else {
+		cout << "Valor de n; " << n << endl;
+		fact = n * factorial(n - 1);//caso general
+		cout << "Valor del factorial recursivo: " << setprecision(0) << setiosflags(ios::fixed) << fact << endl;
+
+		return fact;
+	}
+	
 }
 
 int factorial_recursivo() {
+	string s_num;
+	int num;
 
-	return 0;
+
+	cout << "Ingrese el valor de n: ";
+	cin >> num;
+
+
+	cout << "Factorial: " << factorial(num) << endl;
+
+		return num;
 }
 
 int fibonacci() {
+
+
 
 	return 0;
 }
