@@ -11,18 +11,20 @@ using namespace std;
 
 int factorial();
 int fibonacci();
-int factorial_recursivo();
 long double factorial(int n);
+int factorial_recursivo();
+int fibonacci_recursivo();
 
 int main() {
 	int opcion;
 	do {
 		//system("cls");
 		cout << "\nMenu Principal\n" << endl;
-		cout << "1. Factorial" << endl;
-		cout << "2. Fibonacci" << endl;
+		cout << "1. Factorial iterativo" << endl;
+		cout << "2. Fibonacci iterativo" << endl;
 		cout << "3. Factorial recursivo" << endl;
-		cout << "4. Salir" << endl;
+		cout << "4. Fibonacci recursivo" << endl;
+		cout << "5. Salir" << endl;
 		cout << "Opcion: ";
 		cin >> opcion;
 		switch (opcion) {
@@ -32,13 +34,15 @@ int main() {
 			break;
 		case 3: factorial_recursivo();
 			break;
-		case 4:
+		case 4: fibonacci_recursivo();
+			break;
+		case 5: 
 			cout << "Cerrando Sistema" << endl;
 			break;
 		default: cout << "Valor Invalido" << endl;
 
 		}
-	} while (opcion != 3);
+	} while (opcion != 5);
 
 }
 
@@ -56,20 +60,25 @@ int factorial() {
 		intNumero >> numero;
 
 		if (numero < 0) {
-			cout << "Error!: el numero debera ser mayor o igual a 0." << endl;
+			cout << "Error!: el numero debera ser mayor a 0." << endl;
 		}
-	} while (numero < 0);
+		if (numero > 150) {
+			cout << "Error!: el numero debera ser menor de 150" << endl;
+
+		}
+
+	} while (numero < 0 || numero > 150);
 
 		if (isalpha(s_Numero[0])) {//Función que revisa si el caracter es de tipo alfabeto
 			numero = (int)s_Numero[0];
 			cout << "El caracter ingresado es del alfabeto, su codigo en ASCII es: " <<  numero << endl;
 			
 		}
-			decimal = numero;
+			/*decimal = numero;
 			numero = static_cast <float>(decimal);	
 			
 			cout << "La conversion de int a float es: " << numero << endl;
-		
+		*/
 
 	for (int i = 1; i <= numero; i++) {
 		factorial_N *= i;
@@ -82,27 +91,14 @@ int factorial() {
 
 } 
 
-
 long double factorial(int n) {
 	long double fact;
-	string s_num;
 	int num;
 
-	if(n == 0){ //caso base
+	if (n == 0) { //caso base
 		return 1;
 	}
-
-	if (n < 0) {
-		cout << "Error!: el numero debera ser mayor o igual a cero" << endl;
 		
-	}
-
-	if (isalpha(s_num[0])) {
-
-		cout << "El caracter es del alfabeto......" << endl;
-		num = (int)s_num[0];
-	}
-
 	else {
 		cout << "Valor de n; " << n << endl;
 		fact = n * factorial(n - 1);//caso general
@@ -110,25 +106,71 @@ long double factorial(int n) {
 
 		return fact;
 	}
-	
+
 }
 
 int factorial_recursivo() {
-	string s_num;
 	int num;
 
+	do {
+		cout << "Ingrese el valor de n: ";
+		cin >> num;
 
-	cout << "Ingrese el valor de n: ";
-	cin >> num;
+		if (num < 0) {
+			cout << "Error!: el numero debera ser mayor a cero" << endl;
 
+		}
+		if (num > 150) {
+			cout << "Error!: el numero debera ser menor de 150" << endl;
 
+		}
+	} while (num < 0 || num > 150);
 	cout << "Factorial: " << factorial(num) << endl;
 
-		return num;
+	return num;
 }
 
 int fibonacci() {
+	int numero;
+	int fibo1 = 1, fibo2 = 1;
+	string f_Numero;
+	
+	do{
+		cout << "Introduce un numero mayor a 1: ";
+		cin >> f_Numero;
 
+		stringstream intNumero(f_Numero);
+		intNumero >> numero;
+
+		if (isalpha(f_Numero[0])) {
+			numero = (int)f_Numero[0];
+			cout << "El caracter ingresado es del alfabeto, su codigo en ASCII es: " << numero << endl;
+
+		}
+		if (numero < 1) {
+			cout << "Error!: el numero debera ser mayor a 1." << endl;
+		}
+		if (numero > 150) {
+			cout << "Error!: el numero debera ser menor de 150" << endl;
+
+		}
+
+	} while (numero < 1 || numero > 150);
+
+		
+		cout << "Los " << numero << " primeros numeros de la serie fibonacci son: " << setprecision(0) << setiosflags(ios::fixed) << endl;
+		cout << fibo1 << " ";
+		for (int i = 2; i <= numero; i++) {
+			cout<<fibo2<< " ";
+			fibo2 = fibo1 + fibo2;
+			fibo1 = fibo2 - fibo1;
+
+		}
+		
+		return 0;
+}
+
+int fibonacci_recursivo() {
 
 
 	return 0;
