@@ -14,14 +14,15 @@ int fibonacci();
 long double factorial(int n);
 int factorial_recursivo();
 int fibonacci_recursivo();
+long double fib(int a);
 
 int main() {
 	int opcion;
 	do {
 		//system("cls");
 		cout << "\nMenu Principal\n" << endl;
-		cout << "1. Factorial iterativo" << endl;
-		cout << "2. Fibonacci iterativo" << endl;
+		cout << "1. Factorial" << endl;
+		cout << "2. Fibonacci" << endl;
 		cout << "3. Factorial recursivo" << endl;
 		cout << "4. Fibonacci recursivo" << endl;
 		cout << "5. Salir" << endl;
@@ -46,6 +47,8 @@ int main() {
 
 }
 
+//Aqu comienza codigo de factorial iterativo
+
 int factorial() {
 	long double factorial_N = 1;//Se declaro en long double porque si lo ponemos en int nos manda error
 	int numero;
@@ -69,16 +72,12 @@ int factorial() {
 
 	} while (numero < 0 || numero > 150);
 
-		if (isalpha(s_Numero[0])) {//Función que revisa si el caracter es de tipo alfabeto
-			numero = (int)s_Numero[0];
-			cout << "El caracter ingresado es del alfabeto, su codigo en ASCII es: " <<  numero << endl;
-			
-		}
-			/*decimal = numero;
-			numero = static_cast <float>(decimal);	
-			
-			cout << "La conversion de int a float es: " << numero << endl;
-		*/
+	if (isalpha(s_Numero[0])) {//Función que revisa si el caracter es de tipo alfabeto
+		numero = (int)s_Numero[0];
+		cout << "El caracter ingresado es del alfabeto, su codigo en ASCII es: " << numero << endl;
+
+	}
+
 
 	for (int i = 1; i <= numero; i++) {
 		factorial_N *= i;
@@ -87,18 +86,24 @@ int factorial() {
 	cout << "El factorial del numero ingresado es: " << setprecision(0) << setiosflags(ios::fixed) << factorial_N << endl;//setprecision manipula el numero de ceros despues del punto decimal
 	//setiosflags(ios::fixed) muestra todos los numeros decimales
 
-			return factorial_N;
+	return factorial_N;
 
-} 
+}
 
+//termina aqui..
+
+//Aqui comienza el Codigo factorial recursivo......
 long double factorial(int n) {
 	long double fact;
 	int num;
+	
 
 	if (n == 0) { //caso base
 		return 1;
 	}
-		
+
+	
+
 	else {
 		cout << "Valor de n; " << n << endl;
 		fact = n * factorial(n - 1);//caso general
@@ -109,13 +114,23 @@ long double factorial(int n) {
 
 }
 
+
 int factorial_recursivo() {
 	int num;
+	string fact_recursivo;
 
 	do {
 		cout << "Ingrese el valor de n: ";
-		cin >> num;
+		cin >> fact_recursivo;
 
+		stringstream intNumero(fact_recursivo);
+		intNumero >> num;
+
+		if (isalpha(fact_recursivo[0])) {
+			num = (int)fact_recursivo[0];
+			cout << "El caracter ingresado es del alfabeto, su codigo en ASCII es: " << num << endl;
+
+		}
 		if (num < 0) {
 			cout << "Error!: el numero debera ser mayor a cero" << endl;
 
@@ -124,26 +139,33 @@ int factorial_recursivo() {
 			cout << "Error!: el numero debera ser menor de 150" << endl;
 
 		}
+		
 	} while (num < 0 || num > 150);
+
+	
 	cout << "Factorial: " << factorial(num) << endl;
+
 
 	return num;
 }
+//Termina aqui...
+
+//Codigo fibonacci iterativo comienza aqui...
 
 int fibonacci() {
 	int numero;
 	int fibo1 = 1, fibo2 = 1;
-	string f_Numero;
+	string fibo_Numero;
 	
 	do{
 		cout << "Introduce un numero mayor a 1: ";
-		cin >> f_Numero;
+		cin >> fibo_Numero;
 
-		stringstream intNumero(f_Numero);
+		stringstream intNumero(fibo_Numero);
 		intNumero >> numero;
 
-		if (isalpha(f_Numero[0])) {
-			numero = (int)f_Numero[0];
+		if (isalpha(fibo_Numero[0])) {
+			numero = (int)fibo_Numero[0];
 			cout << "El caracter ingresado es del alfabeto, su codigo en ASCII es: " << numero << endl;
 
 		}
@@ -169,9 +191,55 @@ int fibonacci() {
 		
 		return 0;
 }
+//Termina aqui...
+
+//Codigo fibonacci recursivo comienza aqui...
 
 int fibonacci_recursivo() {
+	int fibo;
+	string fibo_recu;
+
+	do {
+		cout << "Ingrese la posición del numero fibonacci: ";
+		cin >> fibo_recu;
+
+		stringstream intNumero(fibo_recu);
+		intNumero >> fibo;
+
+		if (isalpha(fibo_recu[0])) {
+			fibo = (int)fibo_recu[0];
+			cout << "El caracter ingresado es del alfabeto, su codigo en ASCII es: " << fibo << endl;
+
+		}
+
+		if (fibo < 1) {
+			cout << "Error!: el numero debera ser mayor a 1" << endl;
+
+		}
+		if (fibo > 150) {
+			cout << "Error!: el numero debera ser menor de 150" << endl;
+
+		}
+	} while (fibo < 1 || fibo > 150);
+	cout << "El número en la posición seleccionada es: " << fib(fibo) << endl;
 
 
 	return 0;
 }
+
+long double fib(int pos) {
+	long double valor;
+
+	
+	if (pos == 0 || pos == 1) {//caso base
+		return pos;
+	}
+	else {
+		valor = fib(pos - 1) + fib(pos - 2);//caso recursivo
+		return valor;
+			
+	}
+
+
+}
+//Termina aqui...
